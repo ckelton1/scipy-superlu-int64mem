@@ -382,7 +382,6 @@ extern void    sp_preorder (superlu_options_t *, SuperMatrix*, int*, int*,
 extern void    superlu_abort_and_exit(char*);
 extern void    *superlu_malloc (size_t);
 extern int     *int32Malloc (int);
-extern int     *int32Calloc (int);
 extern int_t   *intMalloc (int_t);
 extern int_t   *intCalloc (int_t);
 extern void    superlu_free (void*);
