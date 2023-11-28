@@ -23,7 +23,7 @@ at the top-level directory.
 
 /* Internal prototypes */
 void  *cexpand (int_t *, MemType, int_t, int, GlobalLU_t *);
-int   cLUWorkInit (int, int, int, int **, singlecomplex **, GlobalLU_t *);
+int   cLUWorkInit (int, int, int, int_t **, singlecomplex **, GlobalLU_t *);
 void  copy_mem_singlecomplex (int_t, void *, void *);
 void  cStackCompress (GlobalLU_t *);
 void  cSetupSpace (void *, int_t, GlobalLU_t *);
@@ -188,7 +188,7 @@ int ilu_cQuerySpace(SuperMatrix *L, SuperMatrix *U, mem_usage_t *mem_usage)
 int_t
 cLUMemInit(fact_t fact, void *work, int_t lwork, int m, int n, int_t annz,
 	  int panel_size, float fill_ratio, SuperMatrix *L, SuperMatrix *U,
-          GlobalLU_t *Glu, int **iwork, singlecomplex **dwork)
+          GlobalLU_t *Glu, int_t **iwork, singlecomplex **dwork)
 {
     int      info, iword, dword;
     SCformat *Lstore;
@@ -337,7 +337,7 @@ cLUMemInit(fact_t fact, void *work, int_t lwork, int m, int n, int_t annz,
  * returns the number of bytes allocated so far when failure occurred.
  */
 int
-cLUWorkInit(int m, int n, int panel_size, int **iworkptr, 
+cLUWorkInit(int m, int n, int panel_size, int_t **iworkptr,
             singlecomplex **dworkptr, GlobalLU_t *Glu)
 {
     int    isize, dsize, extra;
@@ -352,9 +352,9 @@ cLUWorkInit(int m, int n, int panel_size, int **iworkptr,
 	     NUM_TEMPV(m,panel_size,maxsuper,rowblk)) * sizeof(singlecomplex);
     
     if ( Glu->MemModel == SYSTEM ) 
-	*iworkptr = (int *) int32Calloc(isize/sizeof(int));
+	*iworkptr = (int_t *) intCalloc(isize/sizeof(int));
     else
-	*iworkptr = (int *) cuser_malloc(isize, TAIL, Glu);
+	*iworkptr = (int_t *) cuser_malloc(isize, TAIL, Glu);
     if ( ! *iworkptr ) {
 	fprintf(stderr, "cLUWorkInit: malloc fails for local iworkptr[]\n");
 	return (isize + n);
