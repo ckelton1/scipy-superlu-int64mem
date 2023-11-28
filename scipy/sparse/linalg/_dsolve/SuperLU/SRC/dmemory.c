@@ -337,7 +337,7 @@ dLUMemInit(fact_t fact, void *work, int_t lwork, int m, int n, int_t annz,
  * returns the number of bytes allocated so far when failure occurred.
  */
 int
-dLUWorkInit(int m, int n, int panel_size, int **iworkptr, 
+dLUWorkInit(int m, int n, int panel_size, int_t **iworkptr,
             double **dworkptr, GlobalLU_t *Glu)
 {
     int    isize, dsize, extra;
@@ -352,9 +352,9 @@ dLUWorkInit(int m, int n, int panel_size, int **iworkptr,
 	     NUM_TEMPV(m,panel_size,maxsuper,rowblk)) * sizeof(double);
     
     if ( Glu->MemModel == SYSTEM ) 
-	*iworkptr = (int *) int32Calloc(isize/sizeof(int));
+	*iworkptr = (int_t *) intCalloc(isize/sizeof(int));
     else
-	*iworkptr = (int *) duser_malloc(isize, TAIL, Glu);
+	*iworkptr = (int_t *) duser_malloc(isize, TAIL, Glu);
     if ( ! *iworkptr ) {
 	fprintf(stderr, "dLUWorkInit: malloc fails for local iworkptr[]\n");
 	return (isize + n);
