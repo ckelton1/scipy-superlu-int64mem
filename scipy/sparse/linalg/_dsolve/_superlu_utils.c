@@ -96,6 +96,7 @@ void superlu_python_module_abort(char *msg)
 
 void *superlu_python_module_malloc(size_t size)
 {
+    printf("size_t input to superlu_python_module_malloc: %d", size);
     SuperLUGlobalObject *g;
     PyObject *key = NULL;
     void *mem_ptr;
@@ -104,18 +105,24 @@ void *superlu_python_module_malloc(size_t size)
     NPY_ALLOW_C_API;
     g = get_tls_global();
     if (g == NULL) {
+        printf("g is Null");
         return NULL;
     }
     mem_ptr = malloc(size);
     if (mem_ptr == NULL) {
         NPY_DISABLE_C_API;
+        printf("mem_ptr is Null");
 	return NULL;
     }
     key = PyLong_FromVoidPtr(mem_ptr);
-    if (key == NULL)
-	goto fail;
-    if (PyDict_SetItem(g->memory_dict, key, Py_None))
-	goto fail;
+    if (key == NULL) {
+        printf("key is Null");
+        goto fail;
+    }
+    if (PyDict_SetItem(g->memory_dict, key, Py_None)) {
+        printf("PyDict_SetItem failed");
+        goto fail;
+    }
     Py_DECREF(key);
     NPY_DISABLE_C_API;
 
