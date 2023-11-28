@@ -163,7 +163,7 @@ int_t *intMalloc(int_t n)
     return (buf);
 }
 
-int *int32Calloc_(int n)
+int *int32Calloc(int n)
 {
     int *buf;
     register int i;
@@ -177,35 +177,35 @@ int *int32Calloc_(int n)
     return (buf);
 }
 
-int_t *intCalloc_(int_t n)
+int_t *intCalloc(int_t n)
 {
     int_t *buf;
     register int_t i;
     buf = (int_t *) SUPERLU_MALLOC(n * sizeof(int_t));
     if ( !buf ) {
-//	ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
-    buf[] = {-1};
-    return (buf);
+	ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
+//    buf[] = {-1};
+//    return (buf);
     }
     for (i = 0; i < n; ++i) buf[i] = 0;
     return (buf);
 }
 
-int_t *intCalloc(int n)
-{
-    int_t *buf;
-    int *buf_ = int32Calloc_(n);
-    if (buf_[0] == -1) {
-        printf("SUPERLU_MALLOC fails for buf in int32Calloc(). Attempting intCalloc()...");
-        buf = intCalloc(n);
-        if (buf[0] == -1) {
-            ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
-        }
-    } else {
-        int_t *buf = int_t(buf_);
-    }
-    return (buf);
-}
+//int_t *intCalloc(int n)
+//{
+//    int_t *buf;
+//    int *buf_ = int32Calloc_(n);
+//    if (buf_[0] == -1) {
+//        printf("SUPERLU_MALLOC fails for buf in int32Calloc(). Attempting intCalloc()...");
+//        buf = intCalloc(n);
+//        if (buf[0] == -1) {
+//            ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
+//        }
+//    } else {
+//        int_t *buf = int_t(buf_);
+//    }
+//    return (buf);
+//}
 
 #if 0
 check_expanders()
