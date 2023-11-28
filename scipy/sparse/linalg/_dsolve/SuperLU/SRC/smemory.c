@@ -352,7 +352,7 @@ sLUWorkInit(int m, int n, int panel_size, int **iworkptr,
 	     NUM_TEMPV(m,panel_size,maxsuper,rowblk)) * sizeof(float);
     
     if ( Glu->MemModel == SYSTEM ) 
-	*iworkptr = (int *) int32Calloc(isize/sizeof(int));
+	*iworkptr = (int_t *) intCalloc(isize/sizeof(int));
     else
 	*iworkptr = (int *) suser_malloc(isize, TAIL, Glu);
     if ( ! *iworkptr ) {
