@@ -169,9 +169,9 @@ int *int32Calloc(int n)
     register int i;
     buf = (int *) SUPERLU_MALLOC(n * sizeof(int));
     if ( !buf ) {
-//	ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
-    buf[] = {-1};
-    return (buf);
+	ABORT("SUPERLU_MALLOC fails for buf in intCalloc()");
+//    buf[] = {-1};
+//    return (buf);
     }
     for (i = 0; i < n; ++i) buf[i] = 0;
     return (buf);
